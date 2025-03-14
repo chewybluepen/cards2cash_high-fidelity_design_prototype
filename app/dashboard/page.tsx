@@ -44,7 +44,6 @@ export default function Dashboard() {
   // Show welcome celebration on first load
   useEffect(() => {
     const hasSeenWelcome = localStorage.getItem("hasSeenWelcome")
-
     if (!hasSeenWelcome) {
       setTimeout(() => {
         setCelebrationMessage("Welcome back, John!")
@@ -57,7 +56,6 @@ export default function Dashboard() {
   // Function to handle successful transactions
   const handleSuccessfulTransaction = (type: string) => {
     let message = ""
-
     switch (type) {
       case "add":
         message = "Funds added successfully!"
@@ -72,7 +70,6 @@ export default function Dashboard() {
       default:
         message = "Transaction completed!"
     }
-
     setCelebrationMessage(message)
     setShowCelebration(true)
   }
@@ -346,9 +343,7 @@ export default function Dashboard() {
                   <StaggeredFade>
                     {[
                       {
-                        icon: (
-                          <Plus className="h-4 w-4 text-green-600" />
-                        ),
+                        icon: <Plus className="h-4 w-4 text-green-600" />,
                         bgColor: "bg-green-100",
                         title: "Added Funds",
                         time: "Today, 10:30 AM",
@@ -356,9 +351,7 @@ export default function Dashboard() {
                         textColor: "text-green-600",
                       },
                       {
-                        icon: (
-                          <CreditCard className="h-4 w-4 text-red-600" />
-                        ),
+                        icon: <CreditCard className="h-4 w-4 text-red-600" />,
                         bgColor: "bg-red-100",
                         title: "Virtual Card",
                         time: "Yesterday, 3:45 PM",
@@ -366,9 +359,7 @@ export default function Dashboard() {
                         textColor: "text-red-600",
                       },
                       {
-                        icon: (
-                          <RefreshCw className="h-4 w-4 text-primary" />
-                        ),
+                        icon: <RefreshCw className="h-4 w-4 text-primary" />,
                         bgColor: "bg-primary-100",
                         title: "Currency Conversion",
                         time: "Mar 9, 2:15 PM",
@@ -387,9 +378,7 @@ export default function Dashboard() {
                           </div>
                           <div>
                             <p className="font-medium">{transaction.title}</p>
-                            <p className="text-xs text-gray-500">
-                              {transaction.time}
-                            </p>
+                            <p className="text-xs text-gray-500">{transaction.time}</p>
                           </div>
                         </div>
                         <p className={`font-medium ${transaction.textColor}`}>
@@ -434,12 +423,8 @@ export default function Dashboard() {
                         <Badge className="bg-accent text-white">New</Badge>
                         <Tag className="h-4 w-4 text-accent" />
                       </div>
-                      <h3 className="mb-1 font-semibold">
-                        10% Off at TechStore
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        Valid until Mar 31, 2025
-                      </p>
+                      <h3 className="mb-1 font-semibold">10% Off at TechStore</h3>
+                      <p className="text-sm text-gray-500">Valid until Mar 31, 2025</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -452,17 +437,11 @@ export default function Dashboard() {
                   <Card className="min-w-[250px] border-none shadow-md">
                     <CardContent className="p-4">
                       <div className="mb-2 flex items-center justify-between">
-                        <Badge className="bg-secondary text-white">
-                          Limited
-                        </Badge>
+                        <Badge className="bg-secondary text-white">Limited</Badge>
                         <Tag className="h-4 w-4 text-secondary" />
                       </div>
-                      <h3 className="mb-1 font-semibold">
-                        15% Off at FashionHub
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        Valid until Apr 15, 2025
-                      </p>
+                      <h3 className="mb-1 font-semibold">15% Off at FashionHub</h3>
+                      <p className="text-sm text-gray-500">Valid until Apr 15, 2025</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -484,9 +463,10 @@ export default function Dashboard() {
               </AnimatedButton>
             </PulseAnimation>
           </div>
-        </main>
+        </AnimatePresence>
+      </main>
 
-        <EnhancedBottomNavigation />
-      </div>
-    )
+      <EnhancedBottomNavigation />
+    </div>
+  )
 }
