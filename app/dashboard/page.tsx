@@ -40,49 +40,49 @@ export default function Dashboard() {
   const [showSpendingAlert, setShowSpendingAlert] = useState(true)
   const [showCelebration, setShowCelebration] = useState(false)
   const [celebrationMessage, setCelebrationMessage] = useState("")
-  
+
   // Show welcome celebration on first load
   useEffect(() => {
-    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
-    
+    const hasSeenWelcome = localStorage.getItem("hasSeenWelcome")
+
     if (!hasSeenWelcome) {
       setTimeout(() => {
-        setCelebrationMessage("Welcome back, John!");
-        setShowCelebration(true);
-        localStorage.setItem('hasSeenWelcome', 'true');
-      }, 1000);
+        setCelebrationMessage("Welcome back, John!")
+        setShowCelebration(true)
+        localStorage.setItem("hasSeenWelcome", "true")
+      }, 1000)
     }
-  }, []);
+  }, [])
 
   // Function to handle successful transactions
   const handleSuccessfulTransaction = (type: string) => {
-    let message = "";
-    
-    switch(type) {
+    let message = ""
+
+    switch (type) {
       case "add":
-        message = "Funds added successfully!";
-        setBalance(prev => prev + 5000);
-        break;
+        message = "Funds added successfully!"
+        setBalance((prev) => prev + 5000)
+        break
       case "convert":
-        message = "Currency converted successfully!";
-        break;
+        message = "Currency converted successfully!"
+        break
       case "card":
-        message = "Virtual card generated!";
-        break;
+        message = "Virtual card generated!"
+        break
       default:
-        message = "Transaction completed!";
+        message = "Transaction completed!"
     }
-    
-    setCelebrationMessage(message);
-    setShowCelebration(true);
-  };
+
+    setCelebrationMessage(message)
+    setShowCelebration(true)
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
       <FinancialPattern />
-      
-      <CelebrationAnimation 
-        show={showCelebration} 
+
+      <CelebrationAnimation
+        show={showCelebration}
         message={celebrationMessage}
         onComplete={() => setShowCelebration(false)}
       />
@@ -111,7 +111,10 @@ export default function Dashboard() {
             <Button variant="ghost" size="icon" asChild>
               <Link href="/profile">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Display%20Picture-lTJxvWvl6No7YQMsgUyVESc1acHx51.png" alt="User" />
+                  <AvatarImage
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Display%20Picture-lTJxvWvl6No7YQMsgUyVESc1acHx51.png"
+                    alt="User"
+                  />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               </Link>
@@ -167,15 +170,20 @@ export default function Dashboard() {
                   transition={{ duration: 0.5, type: "spring" }}
                   className="flex items-baseline"
                 >
-                  <span className="text-3xl font-bold">GYD {balance.toLocaleString()}</span>
-                  <Badge variant="outline" className="ml-2 border-primary-300 text-primary-50">
+                  <span className="text-3xl font-bold">
+                    GYD {balance.toLocaleString()}
+                  </span>
+                  <Badge
+                    variant="outline"
+                    className="ml-2 border-primary-300 text-primary-50"
+                  >
                     ≈ USD {(balance / 208).toFixed(2)}
                   </Badge>
                 </motion.div>
                 <div className="mt-4 flex justify-between">
-                  <AnimatedButton 
-                    variant="secondary" 
-                    className="flex-1 bg-white/20 text-white hover:bg-white/30" 
+                  <AnimatedButton
+                    variant="secondary"
+                    className="flex-1 bg-white/20 text-white hover:bg-white/30"
                     asChild
                     onClick={() => handleSuccessfulTransaction("add")}
                   >
@@ -184,15 +192,19 @@ export default function Dashboard() {
                       Add Funds
                     </Link>
                   </AnimatedButton>
-                  <AnimatedButton variant="secondary" className="mx-2 flex-1 bg-white/20 text-white hover:bg-white/30" asChild>
+                  <AnimatedButton
+                    variant="secondary"
+                    className="mx-2 flex-1 bg-white/20 text-white hover:bg-white/30"
+                    asChild
+                  >
                     <Link href="/rewards">
                       <Gift className="mr-2 h-4 w-4" />
                       Rewards
                     </Link>
                   </AnimatedButton>
-                  <AnimatedButton 
-                    variant="secondary" 
-                    className="flex-1 bg-white/20 text-white hover:bg-white/30" 
+                  <AnimatedButton
+                    variant="secondary"
+                    className="flex-1 bg-white/20 text-white hover:bg-white/30"
                     asChild
                     onClick={() => handleSuccessfulTransaction("convert")}
                   >
@@ -210,29 +222,39 @@ export default function Dashboard() {
           <section className="mb-6">
             <StaggeredFade className="grid grid-cols-3 gap-3">
               <Link href="/monthly-growth">
-                <motion.div whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+                <motion.div
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
                   <Card className="bg-gradient-to-br from-green-50 to-green-100 transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <TrendingUp className="mb-2 h-6 w-6 text-green-600" />
-                      <p className="text-center text-sm font-medium">Monthly Growth</p>
+                      <p className="text-center text-sm font-medium">
+                        Monthly Growth
+                      </p>
                       <p className="text-lg font-bold text-green-600">+15%</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               </Link>
               <Link href="/transactions">
-                <motion.div whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+                <motion.div
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
                   <Card className="bg-gradient-to-br from-primary-50 to-primary-100 transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <BarChart3 className="mb-2 h-6 w-6 text-primary" />
-                      <p className="text-center text-sm font-medium">Transactions</p>
+                      <p className="text-center text-sm font-medium">
+                        Transactions
+                      </p>
                       <p className="text-lg font-bold text-primary">24</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               </Link>
               <Link href="/savings">
-                <motion.div whileHover={{ y: -5, transition: { duration: 0.2 } }}>
+                <motion.div
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
                   <Card className="bg-gradient-to-br from-accent-50 to-accent-100 transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <Coins className="mb-2 h-6 w-6 text-accent" />
@@ -246,14 +268,18 @@ export default function Dashboard() {
           </section>
 
           <FadeIn delay={0.2} className="mb-6">
-            <h2 className="mb-3 text-lg font-semibold text-neutral-text">Quick Actions</h2>
+            <h2 className="mb-3 text-lg font-semibold text-neutral-text">
+              Quick Actions
+            </h2>
             <div className="grid grid-cols-2 gap-3">
               <Link href="/add-funds">
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                   <Card className="h-full transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <Smartphone className="mb-2 h-8 w-8 text-primary" />
-                      <p className="text-center text-sm font-medium">Add Prepaid Credit</p>
+                      <p className="text-center text-sm font-medium">
+                        Add Prepaid Credit
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -263,7 +289,9 @@ export default function Dashboard() {
                   <Card className="h-full transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <CreditCard className="mb-2 h-8 w-8 text-primary" />
-                      <p className="text-center text-sm font-medium">Generate Card</p>
+                      <p className="text-center text-sm font-medium">
+                        Generate Card
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -273,7 +301,9 @@ export default function Dashboard() {
                   <Card className="h-full transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <DollarSign className="mb-2 h-8 w-8 text-primary" />
-                      <p className="text-center text-sm font-medium">Currency Conversion</p>
+                      <p className="text-center text-sm font-medium">
+                        Currency Conversion
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -283,7 +313,9 @@ export default function Dashboard() {
                   <Card className="h-full transition-all hover:shadow-md border-none">
                     <CardContent className="flex flex-col items-center justify-center p-4">
                       <Bank className="mb-2 h-8 w-8 text-primary" />
-                      <p className="text-center text-sm font-medium">Connect Bank</p>
+                      <p className="text-center text-sm font-medium">
+                        Connect Bank
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -293,8 +325,15 @@ export default function Dashboard() {
 
           <FadeIn delay={0.3} className="mb-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-neutral-text">Recent Transactions</h2>
-              <AnimatedButton variant="ghost" size="sm" asChild className="text-primary hover:text-primary-700">
+              <h2 className="text-lg font-semibold text-neutral-text">
+                Recent Transactions
+              </h2>
+              <AnimatedButton
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-primary hover:text-primary-700"
+              >
                 <Link href="/transactions">
                   View All
                   <ChevronRight className="ml-1 h-4 w-4" />
@@ -307,31 +346,37 @@ export default function Dashboard() {
                   <StaggeredFade>
                     {[
                       {
-                        icon: <Plus className="h-4 w-4 text-green-600" />,
+                        icon: (
+                          <Plus className="h-4 w-4 text-green-600" />
+                        ),
                         bgColor: "bg-green-100",
                         title: "Added Funds",
                         time: "Today, 10:30 AM",
                         amount: "+GYD 5,000",
-                        textColor: "text-green-600"
+                        textColor: "text-green-600",
                       },
                       {
-                        icon: <CreditCard className="h-4 w-4 text-red-600" />,
+                        icon: (
+                          <CreditCard className="h-4 w-4 text-red-600" />
+                        ),
                         bgColor: "bg-red-100",
                         title: "Virtual Card",
                         time: "Yesterday, 3:45 PM",
                         amount: "-GYD 2,500",
-                        textColor: "text-red-600"
+                        textColor: "text-red-600",
                       },
                       {
-                        icon: <RefreshCw className="h-4 w-4 text-primary" />,
+                        icon: (
+                          <RefreshCw className="h-4 w-4 text-primary" />
+                        ),
                         bgColor: "bg-primary-100",
                         title: "Currency Conversion",
                         time: "Mar 9, 2:15 PM",
                         amount: "GYD → USD",
-                        textColor: "text-primary"
-                      }
+                        textColor: "text-primary",
+                      },
                     ].map((transaction, index) => (
-                      <motion.div 
+                      <motion.div
                         key={index}
                         whileHover={{ backgroundColor: "#f9fafb" }}
                         className="flex items-center justify-between p-4"
@@ -342,10 +387,14 @@ export default function Dashboard() {
                           </div>
                           <div>
                             <p className="font-medium">{transaction.title}</p>
-                            <p className="text-xs text-gray-500">{transaction.time}</p>
+                            <p className="text-xs text-gray-500">
+                              {transaction.time}
+                            </p>
                           </div>
                         </div>
-                        <p className={`font-medium ${transaction.textColor}`}>{transaction.amount}</p>
+                        <p className={`font-medium ${transaction.textColor}`}>
+                          {transaction.amount}
+                        </p>
                       </motion.div>
                     ))}
                   </StaggeredFade>
@@ -356,8 +405,15 @@ export default function Dashboard() {
 
           <FadeIn delay={0.4}>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-neutral-text">Partner Offers</h2>
-              <AnimatedButton variant="ghost" size="sm" asChild className="text-primary hover:text-primary-700">
+              <h2 className="text-lg font-semibold text-neutral-text">
+                Partner Offers
+              </h2>
+              <AnimatedButton
+                variant="ghost"
+                size="sm"
+                asChild
+                className="text-primary hover:text-primary-700"
+              >
                 <Link href="/offers">
                   View All
                   <ChevronRight className="ml-1 h-4 w-4" />
@@ -378,8 +434,12 @@ export default function Dashboard() {
                         <Badge className="bg-accent text-white">New</Badge>
                         <Tag className="h-4 w-4 text-accent" />
                       </div>
-                      <h3 className="mb-1 font-semibold">10% Off at TechStore</h3>
-                      <p className="text-sm text-gray-500">Valid until Mar 31, 2025</p>
+                      <h3 className="mb-1 font-semibold">
+                        10% Off at TechStore
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        Valid until Mar 31, 2025
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -392,11 +452,17 @@ export default function Dashboard() {
                   <Card className="min-w-[250px] border-none shadow-md">
                     <CardContent className="p-4">
                       <div className="mb-2 flex items-center justify-between">
-                        <Badge className="bg-secondary text-white">Limited</Badge>
+                        <Badge className="bg-secondary text-white">
+                          Limited
+                        </Badge>
                         <Tag className="h-4 w-4 text-secondary" />
                       </div>
-                      <h3 className="mb-1 font-semibold">15% Off at FashionHub</h3>
-                      <p className="text-sm text-gray-500">Valid until Apr 15, 2025</p>
+                      <h3 className="mb-1 font-semibold">
+                        15% Off at FashionHub
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        Valid until Apr 15, 2025
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -406,7 +472,11 @@ export default function Dashboard() {
 
           <div className="fixed bottom-20 right-4">
             <PulseAnimation>
-              <AnimatedButton size="icon" className="h-12 w-12 rounded-full bg-secondary shadow-lg hover:bg-secondary-600 text-white" asChild>
+              <AnimatedButton
+                size="icon"
+                className="h-12 w-12 rounded-full bg-secondary shadow-lg hover:bg-secondary-600 text-white"
+                asChild
+              >
                 <Link href="/chat">
                   <MessageSquare className="h-6 w-6" />
                   <span className="sr-only">Chat with AI Assistant</span>
@@ -420,4 +490,3 @@ export default function Dashboard() {
       </div>
     )
 }
-
